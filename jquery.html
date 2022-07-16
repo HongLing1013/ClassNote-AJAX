@@ -66,9 +66,9 @@
     //利用$.ajax()方法傳送請求並取得回應
 /*     $.ajax(
       {
-        url:'https://kktix.com/events.json',
-        type:'get',
-        success:(res)=>{
+        url:'https://kktix.com/events.json',        //網址
+        type:'get',  //使用get
+        success:(res)=>{        //使用香草JS的function
             eventList(res)
         },
       }
@@ -76,8 +76,9 @@
  */
     
     //利用$.get()方法傳送請求並取得回應
+        // 這個方法是上面那個方法的簡化
       $.get('https://kktix.com/events.json',(res)=>{
-        eventList(res)
+        eventList(res)      //用香草JS的function
       })
 
   </script>

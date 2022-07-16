@@ -70,10 +70,9 @@
 
     fetch('https://kktix.com/events.json',{method:'get'})
     .then((res)=>{
-        
-        return res.json()
+        return res.json()//return給網頁使用
     })
-    .then((events)=>{
+    .then((events)=>{//把活動印出來
         let title=document.querySelector(".title")
         title.innerHTML=events.title
         //console.log(data)
@@ -86,11 +85,10 @@
                         ${entrys[i].title}
                     <div class="name">${entrys[i].author.name}</div>
                     <div class="summary">${entrys[i].summary}</div>
-                
                     </div>
                    </li>`;
         }
-        ul.innerHTML=li
+        ul.innerHTML=li//填入ul裡面
     })
     .catch()
 

@@ -74,29 +74,37 @@
 
     //建立得到回應時的各項設定及行為
     xhr.onload=function(){
-        let type=xhr.getResponseHeader("Content-Type");
-        let status=xhr.status//可能拿到成功或失敗的檔案
+        let type=xhr.getResponseHeader("Content-Type");//判斷Type內容是不是我們要的
+        let status=xhr.status//拿到成功或失敗的檔案數
         let res=xhr.responseText//把這個字串格式拿到後灌到格式裡面去
-        let data=JSON.parse(res)
-        let title=document.querySelector(".title")
-        title.innerHTML=data.title
+        let data=JSON.parse(res)//把res解碼
+        let title=document.querySelector(".title")//取得title這個節點
+        title.innerHTML=data.title//把字串放在title這個地方
+
+        /* 由於是從網路上撈資料
+           所以不是馬上出現
+           會延遲一下後才會顯示出來 */
 
         // console.log(data);
-        let ul=document.querySelector('ul')
+        let ul=document.querySelector('ul')//取得ul這個節點
         let li='';
-        let entrys=data.entry
-        for(let i=0;i<entrys.length;i++){
+        let entrys=data.entry//data裡面的entry是一個陣列
+        for(let i=0;i<entrys.length;i++){/* 用迴圈印出陣列內容
+                                            第i筆資料的title
+                                            印出第i筆資料裡面的author的name(名稱)
+                                            以及summary(摘要) */
             li=li+`<li class='card col-3'>
                     <div class='card-body'>
-                        ${entrys[i].title}
+                        ${entrys[i].title} 
                     <div class="name">${entrys[i].author.name}</div>
                     <div class="summary">${entrys[i].summary}</div>
                 
                     </div>
                    </li>`;
         }
-        ul.innerHTML=li
+        ul.innerHTML=li//要把上面迴圈的內容寫入ul
     }
     //送出請求
     xhr.send();
+
     </script>
