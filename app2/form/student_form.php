@@ -18,19 +18,19 @@ if($type=='add'){
       <p>
         <?php
         if($type=='edit'){
-          echo "<input type='hidden' name='id' value=''>";
+          echo "<input type='hidden' name='id' id='stuId' value=''>";
         }
 
         ?>
         <?php
         if($type=='add'){
 
-          echo "<input type='button' value='確認新增' onclick='create()'>";
+          echo "<input type='button' class='btn btn-primary' value='確認新增' onclick='create()'>";
         }else{
-          echo "<input type='button' value='確認編輯' onclick='update()'>";
+          echo "<input type='button' class='btn btn-primary' value='確認編輯' onclick='update()'>";
 
         }
         ?>
-        <input type="button" value="取消" onclick="$('#studentForm').html('')">
+        <input type="button" class='btn btn-warning' value="取消" onclick="$('.modal-body').html('');$('#stuModal').modal('hide')">
       </p>
     </form>
