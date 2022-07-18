@@ -107,6 +107,10 @@ function del(classroom,id){
       $("#result").css({background:'pink',color:'red',display:'block'}).text("刪除失敗");
     }
     query(classroom);
+
+    settimeout(()=>{//3秒後把刪除時間這個訊息給消除
+      $("#result").hide();
+    },3000);
   })
 }
 
