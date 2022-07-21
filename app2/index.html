@@ -54,6 +54,11 @@
 
   </div>
   <div class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- 要去執行query這個程式 -->
+    <!-- a連結的href本身事件背景是onclick -->
+    <!-- 這一段是 把查詢的動作 寫成API放在後面之後 
+         在前端呼叫 再用JS的程式串成HTML語法 放在畫面上
+         就不需要去header -->
     <a class="nav-link active" href="javascript:query(101)">101</a>
     <a class="nav-link" href="javascript:query(102)">102</a>
     <a class="nav-link" href="javascript:query(103)">103</a>
@@ -110,7 +115,13 @@ function create(){
     "birthday":$("#birthday").val()
   }
 
+  /* 前面的表單按下create的動作
+     會去執行create的程式
+     然後執行裡面的表單內容
+     再用post船表單到insert的程式裡面
+     然後print_r把post變成字串給瀏覽器回傳給res */
   $.post("./api/insert.php",form,(res)=>{
+    // 如果把res轉成數字===1就成功不然就失敗
     if(parseInt(res)===1){
       alert("新增成功")
       query(form.classroom)
@@ -128,8 +139,10 @@ function query(classroom){
   $("#room").html(`現在顯示的是${classroom}班的學生`)
   $("#room").data('classroom',classroom)
   $.get("api/query.php",{classroom},(students)=>{
+    // 幫我把students改成JSON格式後再指定給students這個變數
     students=JSON.parse(students)
     let tr="";
+    // 用迴圈把內容印出來
     students.forEach((val,idx)=>{
       tr=tr+`<div class='border rounded p-3 col-md-3 col-sm-6'>
                 <div>${val.name}</div>
@@ -201,6 +214,9 @@ function update(){
 //刪除資料的函式
 function del(id){
   let classroom=$("#room").data('classroom')
+  /* 到delete.php這隻程式 把id送出去
+     如果回傳的數字是1
+     那就顯示刪除成功 不然就顯示失敗 */
   $.post("./api/delete.php",{id},(res)=>{
       if(parseInt(res)===1){
         $("#result").css({background:'lightblue',color:'blue',display:'block'}).text("刪除成功");
@@ -208,8 +224,10 @@ function del(id){
         $("#result").css({background:'pinky',color:'red',display:'block'}).text("刪除失敗");
       }
 
+      // 刪除之後要重新顯示出來
       query(classroom);
 
+      // 顯示出來的結果在3秒以後淡出~
       setTimeout(()=>{
         $("#result").hide(500);
       },3000)

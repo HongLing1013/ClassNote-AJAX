@@ -1,4 +1,8 @@
 <?php
+
+// post傳過來的用post收 會回傳給index的res
+// print_r($_POST);
+
 //處理新增資料的請求
 
 $dsn="mysql:host=localhost;charset=utf8;dbname=students";
